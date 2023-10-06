@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 </head>
-
+<body class="hold-transition sidebar-mini">
 @include('admin.layout.navbar')
 
 @include('admin.layout.sidebar')
@@ -41,6 +41,9 @@
 <!-- Bootstrap JS -->
 <script src="{{ asset('/assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
+<!-- AdminLTE App -->
+<script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+
 <!-- DataTables  & Plugins -->
 <script src="{{ asset('/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -56,3 +59,6 @@
 <script src="{{ asset('/assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
 @stack('scripts')
+
+</body>
+</html>

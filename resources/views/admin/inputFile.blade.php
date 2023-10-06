@@ -5,7 +5,7 @@
 <div class="container-fluid">
   <div class="row mb-2">
     <div class="col-sm-6">
-      <h1>Management Kategori</h1>
+      <h1>Input File</h1>
     </div>
     <div class="col-sm-6">
   
@@ -22,9 +22,16 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <button type="button" class="btn btn-success btn-sm float-right" onclick="tambahData()">
-                  Tambah Kategori
-                </button>
+                <div class="row">
+                  <div class="col-md-6">
+                      <h5>{{ $namaKategori }}</h5>
+                  </div>
+                  <div class="col-md-6 text-right">
+                      <button type="button" class="btn btn-success btn-sm" onclick="tambahData()">
+                          Upload File
+                      </button>
+                  </div>
+              </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -32,8 +39,9 @@
                   <thead>
                   <tr>
                     <th style="width: 10%;">No.</th>
-                    <th style="width: 60%;">Kategori</th>
-                    <th style="width: 15%;">Action</th>
+                    <th style="width: 40%;">Nama</th>
+                    <th style="width: 40%;">File</th>
+                    <th style="width: 10%;">Action</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -63,7 +71,8 @@
                   <tfoot>
                   <tr>
                     <th>No.</th>
-                    <th>Kategori</th>
+                    <th>Nama</th>
+                    <th>File</th>
                     <th>Action</th>
                   </tr>
                   </tfoot>
@@ -87,21 +96,29 @@
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addAdminModal-label"><strong>Tambah Kategori</strong></h5>
+        <h5 class="modal-title" id="addAdminModal-label"><strong>Tambah File</strong></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="row form-message"></div>
-        <form id="AdminForm-add" method="POST" action="{{ route('inputKategori.store') }}">
+        <form id="AdminForm-add" method="POST" action="{{ url('/inputFile'.'/'.$categoryId) }}" enctype="multipart/form-data">
           @csrf
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label for="nama">Kategori</label>
-                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="name-add" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Kategori" required>
+                <label for="nama">Nama</label>
+                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="name-add" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama File" required>
+                <input type="hidden" class="form-control" id="kategori-add" name="kategori" value="{{ $categoryId }}" placeholder="" required>
                 @error('nama')
+                  <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                @enderror
+              </div>
+              <div class="form-group">
+                <label for="file">Upload File</label>
+                <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file"value="{{ old('file') }}" placeholder="Masukkan File" style="padding: 0; height: 100%;">
+                @error('file')
                   <span class="invalid-feedback" role="alert">{{ $message }}</span>
                 @enderror
               </div>
@@ -188,7 +205,7 @@
   <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title" id="deleteAdminModal-label"><strong>Hapus Kategori </strong></h5>
+              <h5 class="modal-title" id="deleteAdminModal-label"><strong>Hapus File </strong></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
               </button>
@@ -198,7 +215,7 @@
             <form id="AdminForm-delete" method="POST" action="{{ url('admin/input-admin') }}" enctype="multipart/form-data">
               @csrf
               @method('DELETE')
-              <p>Anda yakin ingin menghapus kategori <strong><span id="show_nama"></span></strong> ?</p>
+              <p>Anda yakin ingin menghapus file <strong><span id="show_nama"></span></strong> ?</p>
             </form>
           </div>
           <div class="modal-footer">
@@ -265,7 +282,7 @@
             serverSide:true,
             stateSave: true,
             ajax:{
-              url: '{{ route('dataKategori') }}',
+              url: '{{ route('dataFile', ['id' => $categoryId]) }}',
               dataType: 'json',
               type: 'POST',
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -273,11 +290,11 @@
             columns:[
                 {data:'nomor', name:'nomor', sortable:false, searchable:false},
                 {data:'nama',name:'nama', sortable: true, searchable: true},
+                {data:'file_name',name:'file_name', sortable: true, searchable: true},
                 {data:'id',name:'id', sortable: false, searchable: false,
                 render: function(data, type, row, meta) {
                     var btn = `<div class="d-flex justify-content-around">` +
-                        `<button data-url="{{ url('/inputKategori/') }}/` + data + `" class="btn btn-info btn-sm" data-toggle="modal" onclick="updateData(this)" data-id="` + row.id +  `" data-nama="` + row.nama + `"><i class="fa-solid fa-pen-to-square"></i></button>` +
-                        `<button data-url="{{ url('/inputKategori/') }}/` + data + `" class="btn btn-danger btn-sm" data-toggle="modal" onclick="deleteData(this)" data-id="` + row.id + `" data-name="` + row.name + `"><i class="fa-solid fa-trash"></i></button>` +
+                        `<button data-url="{{ url('/inputFile/') }}/` + data + `" class="btn btn-danger btn-sm" data-toggle="modal" onclick="deleteData(this)" data-id="` + row.id + `" data-name="` + row.name + `"><i class="fa-solid fa-trash"></i></button>` +
                         `</div>`;
                     return btn;
                 }
@@ -285,7 +302,8 @@
 
             ]
         });
-
+        // alert('DataTable initialized!');
+        
         $('#AdminForm-add').submit(function(e) {
             e.preventDefault();
             

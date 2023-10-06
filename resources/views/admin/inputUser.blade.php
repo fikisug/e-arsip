@@ -272,7 +272,7 @@
   <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title" id="deleteAdminModal-label"><strong>Hapus Admin </strong></h5>
+              <h5 class="modal-title" id="deleteAdminModal-label"><strong>Hapus User </strong></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
               </button>
@@ -282,7 +282,7 @@
             <form id="AdminForm-delete" method="POST" action="{{ url('admin/input-admin') }}" enctype="multipart/form-data">
               @csrf
               @method('DELETE')
-              <p>Anda yakin ingin menghapus admin <strong><span id="show_nama"></span></strong> ?</p>
+              <p>Anda yakin ingin menghapus user <strong><span id="show_nama"></span></strong> ?</p>
             </form>
           </div>
           <div class="modal-footer">

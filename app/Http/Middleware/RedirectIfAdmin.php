@@ -24,6 +24,6 @@ class RedirectIfAdmin
         // Jika bukan admin, redirect atau berikan respons sesuai kebutuhan
         // return redirect('/')->with('error', 'Unauthorized access');
 
-        return redirect('/dashboardUser');;
+        return redirect('/login');;
     }
 }

@@ -18,12 +18,22 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // Validasi input
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'username' => 'required|string|unique:users',
-            'password' => 'required|string|min:4',
-            'role' => 'required|in:admin,user',
+
+        $validator = Validator::make($request->all(), [
+            'username' => ['required', 'string', 'max:50', Rule::unique('users'), 'regex:/^[^\s\W]+$/'],
+            'nama' => ['required', 'string', 'max:255'],
+            'role' => ['required', 'string', 'in:admin,user'],
+            'password' => ['min:4'],
         ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'modal_close' => false,
+                'message' => 'Data gagal diubah. ' .$validator->errors()->first(),
+                'data' => $validator->errors()
+            ]);
+        }
 
         // Simpan data ke database
         $user = new User();
@@ -65,7 +75,7 @@ class UserController extends Controller
             'nama' => ['required', 'string', 'max:255'],
             'status' => ['required', 'string', 'max:50'],
             'role' => ['required', 'string', 'max:50'],
-            'password' => [],
+            'password' => ['min:4', 'nullable'],
         ]);
 
         if($validator->fails()){
