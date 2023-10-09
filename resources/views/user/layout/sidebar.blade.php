@@ -9,7 +9,6 @@
   </div>
   <div class="border-top"></div>
   
-
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- SidebarSearch Form -->
