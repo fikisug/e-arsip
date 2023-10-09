@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\DataTables;
 
@@ -13,6 +14,14 @@ class KategoriController extends Controller
     public function index()
     {
         return view('admin.inputKategori');
+    }
+
+    public function show()
+    {
+        // dd('show');
+        $allKategori = Kategori::all();
+
+        return view('admin.partials.category-list', compact('allKategori'));
     }
 
     public function store(Request $request)
@@ -87,9 +96,7 @@ class KategoriController extends Controller
     {
         $kategori = Kategori::find($id);
 
-        $kategori->hapus = 1;
-
-        $kategori->save();
+        $kategori->delete();
 
         return response()->json([
             'status' => true,
@@ -97,6 +104,13 @@ class KategoriController extends Controller
             'message' => 'Data berhasil dihapus',
             'data' => null
         ]);
+    }
+
+    public function loadNavbar()
+    {
+        $allKategori = Kategori::all();
+
+        return view('partials.category-list', compact('allKategori'));
     }
 
     public function data()

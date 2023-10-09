@@ -6,6 +6,7 @@ use App\Models\File;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
@@ -16,7 +17,13 @@ class FileController extends Controller
     {
         $nmKategori = Kategori::find($id);
         $namaKategori = $nmKategori->nama;
-        return view('admin.inputFile', ['categoryId' => $id, 'namaKategori' => $namaKategori]);
+
+        if (auth()->user()->role == 'admin') {
+            return view('admin.inputFile', ['categoryId' => $id, 'namaKategori' => $namaKategori]);
+        }else{
+            return view('user.inputFile', ['categoryId' => $id, 'namaKategori' => $namaKategori]);
+        }
+        
     }
 
     public function store(Request $request, $id){
@@ -96,5 +103,49 @@ class FileController extends Controller
 
         // return DataTables::of($users)
             // ->make(true);
+    }
+
+    public function dataAll()
+    {
+        $data = DB::table('file as a')
+            ->join('kategori as b', 'a.id_kategori', '=', 'b.id')
+            ->join('users as c', 'a.uploader', '=', 'c.id')
+            ->select('a.nama', 'a.id', 'b.nama as kategori', 'c.nama as uploader', 'a.file')
+            ->selectRaw("SUBSTRING_INDEX(a.file, '/', -1) as file_name")
+            ->get();
+
+
+        return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('nomor', function ($data) {
+                        // Hitung nomor urut secara dinamis
+                        static $nomor = 0;
+                        $nomor++;
+                        return $nomor;
+                    })
+                    ->addColumn('file_name', function ($data) {
+                        // Access the computed file_name attribute
+                        return $data->file_name;
+                    })
+                    ->make(true);
+
+        // $users = User::select(['id', 'nama', 'username']);
+
+        // return DataTables::of($users)
+            // ->make(true);
+    }
+
+    public function download($id)
+    {
+        $file = File::findOrFail($id);
+        $file1 = storage_path('app\public' . '\\' . $file->file); // Sesuaikan dengan lokasi penyimpanan file Anda
+
+        //return response()->download($file1);
+        return response()->json([
+            'status' => true,
+            'modal_close' => false,
+            'message' => 'Data berhasil dihapus',
+            'data' => null
+        ]);
     }
 }

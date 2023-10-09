@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfAdmin
+class RedirectIfUser
 {
     /**
      * Handle an incoming request.
@@ -17,13 +17,13 @@ class RedirectIfAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role == 'admin') {
+        if (Auth::check() && Auth::user()->role == 'user') {
             return $next($request);
         }
 
         // Jika bukan admin, redirect atau berikan respons sesuai kebutuhan
         // return redirect('/')->with('error', 'Unauthorized access');
 
-        return redirect('/login');
+        return redirect('/login');;
     }
 }

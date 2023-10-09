@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>e-Arsip | Dashboard Admin</title>
+  <title>e-Arsip</title>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -17,9 +17,9 @@
   <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 </head>
 <body class="hold-transition sidebar-mini">
-@include('admin.layout.navbar')
+@include('user.layout.navbar')
 
-@include('admin.layout.sidebar')
+@include('user.layout.sidebar')
 
   <div class="content-wrapper">
   
@@ -29,7 +29,7 @@
   
   </div>
   
-@include('admin.layout.footer')
+@include('user.layout.footer')
 
 <script src="{{ asset('/assets/dist/js/adminlte.min.js') }}"></script>
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>

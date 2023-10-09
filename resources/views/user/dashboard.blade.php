@@ -1,4 +1,4 @@
-@extends('admin.layout.tamplate')
+@extends('user.layout.tamplate')
 
 @section('content')  
     <!-- Main content -->
@@ -7,7 +7,7 @@
       <div class="row">
         @foreach ($jmlFile as $k)
         <div class="col-12 col-sm-6 col-md-3">
-          <a href="{{ route('kategori', ['id' => $k->id]) }}" class="" style="color: black;">
+          <a href="{{ route('kategori2', ['id' => $k->id]) }}" class="" style="color: black;">
           <div class="info-box mb-3">
             <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-file"></i></span>
 

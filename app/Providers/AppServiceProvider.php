@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\File;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;

@@ -30,30 +30,14 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{ route('dashboardAdmin') }}" class="nav-link @active('dashboardAdmin')">
+            <a href="{{ route('dashboardAdmin2') }}" class="nav-link @active('dashboardAdmin')">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('inputUser.index') }}" class="nav-link @active('inputUser.index')">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Management User
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('inputKategori.index') }}" class="nav-link @active('inputKategori.index')">
-              <i class="nav-icon fas fa-list"></i>
-              <p>
-                Management Kategori
-              </p>
-            </a>
-          </li>
-          <li class="nav-item {{ request()->is('inputFile/*') ? 'menu-open' : '' }}">
+          <li class="nav-item {{ request()->is('inputFileUser/*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-circle-plus"></i>
               <p>
@@ -64,7 +48,7 @@
             <ul class="nav nav-treeview" id="dynamicNavbar">
               @foreach ($allKategori as $k)
               <li class="nav-item">
-                <a href="{{ url('/inputFile'.'/'.$k->id) }}" class="nav-link {{ request()->url() == url('/inputFile'.'/'.$k->id) ? 'active' : '' }}">
+                <a href="{{ url('/inputFileUser'.'/'.$k->id) }}" class="nav-link {{ request()->url() == url('/inputFileUser'.'/'.$k->id) ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{$k->nama}}</p>
                 </a>
