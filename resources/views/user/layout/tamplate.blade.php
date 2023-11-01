@@ -21,7 +21,7 @@
 
 @include('user.layout.sidebar')
 
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="background-color : #000000">
   
     <section class="content-header">
         @yield('content')

@@ -1,11 +1,18 @@
 <!-- Site wrapper -->
+<style>
+  #tulisan_hover:hover{
+    color: #00dddd;
+    transition: color 0.1s ease-out;
+  }
+</style>
+
 <div class="wrapper">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #f2f8f9">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button" id="tulisan_hover"><i class="fas fa-bars"></i></a>
       </li>
     </ul>
 
@@ -66,7 +73,7 @@
         </div>
       </li>
       <li class="nav-item dropdown user-menu">
-        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="tulisan_hover">
           {{-- <img src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="user-image img-circle elevation-2" alt="User Image"> --}}
           <i class="fa-solid fa-user-check"></i>
           <span class="d-none d-md-inline">{{ Auth::user()->nama }}</span>
@@ -85,7 +92,7 @@
         </ul>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button" id="tulisan_hover">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>

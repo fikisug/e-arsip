@@ -31,5 +31,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('active', function ($expression) {
             return "<?php echo Route::is($expression) ? 'active' : ''; ?>";
         });
+        Blade::directive('css', function ($expression) {
+            return "<?php echo Route::is($expression) ? 'background-color: #ffa501;' : ''; ?>";
+        });
     }
 }

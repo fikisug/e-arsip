@@ -5,7 +5,7 @@
 <div class="container-fluid">
   <div class="row mb-2">
     <div class="col-sm-6">
-      <h1>Management User</h1>
+      <h1 style="color: white">Management User</h1>
     </div>
     <div class="col-sm-6">
   
@@ -21,8 +21,8 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
-              <div class="card-header">
-                <button type="button" class="btn btn-success btn-sm float-right" onclick="tambahData()">
+              <div class="card-header" style="background-color: #f7f8f9">
+                <button type="button" class="btn btn-success btn-sm float-right" onclick="tambahData()" style="background-color: #ffa501; border-color: #ffa501">
                   Tambah User
                 </button>
               </div>
@@ -375,7 +375,7 @@
                 {data:'id',name:'id', sortable: false, searchable: false,
                 render: function(data, type, row, meta) {
                     var btn = `<div class="d-flex justify-content-around">` +
-                        `<button data-url="{{ url('/inputUser/') }}/` + data + `" class="btn btn-info btn-sm" data-toggle="modal" onclick="updateData(this)" data-id="` + row.id + `" data-username="` + row.username + `" data-nama="` + row.nama + `" data-status="` + row.status + `" data-role="` + row.role + `"><i class="fa-solid fa-pen-to-square"></i></button>&nbsp` +
+                        `<button data-url="{{ url('/inputUser/') }}/` + data + `" class="btn btn-sm" style="background-color: #0dd3c5;" data-toggle="modal" onclick="updateData(this)" data-id="` + row.id + `" data-username="` + row.username + `" data-nama="` + row.nama + `" data-status="` + row.status + `" data-role="` + row.role + `"><i class="fa-solid fa-pen-to-square"></i></button>&nbsp` +
                         `<button data-url="{{ url('/inputUser/') }}/` + data + `" class="btn btn-danger btn-sm" data-toggle="modal" onclick="deleteData(this)" data-id="` + row.id + `" data-name="` + row.name + `"><i class="fa-solid fa-trash"></i></button>` +
                         `</div>`;
                     return btn;

@@ -15,7 +15,7 @@ class AdminController extends Controller
         $jmlFile = DB::table('kategori as a')
             ->leftJoin('file as b', 'b.id_kategori', '=', 'a.id')
             ->selectRaw('COUNT(b.id) as count, a.nama, a.id')
-            ->groupBy('a.id')
+            ->groupBy('a.id', 'a.nama')
             ->get();
         if (auth()->user()->role == 'admin') {
             return view('admin.dashboard')

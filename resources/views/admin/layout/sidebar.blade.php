@@ -1,8 +1,18 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4" style="height: 110%" id="sidebar">
+<style>
+  #tulisan_hover:hover{
+    color: #00dddd;
+    transition: color 0.1s ease-out;
+  }
+  span, p{  
+    color: black;
+  }
+</style>
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="height: 110%; background-color: #f7f8f9;" id="sidebar">
     <!-- Brand Logo -->
     <div class="d-flex justify-content-center">
-      <a href="{{ asset('assets/index3.html') }}" class="brand-link d-flex">
+      <a href="#" class="brand-link d-flex" id="tulisan_hover">
           {{-- <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
           <span class="brand-text font-weight-light">e-Arsip</span>
       </a>
@@ -30,24 +40,24 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{ route('dashboardAdmin') }}" class="nav-link @active('dashboardAdmin')">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <a href="{{ route('dashboardAdmin') }}" class="nav-link @active('dashboardAdmin')" style="@css('dashboardAdmin')">
+              <i class="nav-icon fas fa-tachometer-alt" style="color: black"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('inputUser.index') }}" class="nav-link @active('inputUser.index')">
-              <i class="nav-icon fas fa-user"></i>
+            <a href="{{ route('inputUser.index') }}" class="nav-link @active('inputUser.index')" style="@css('inputUser.index')">
+              <i class="nav-icon fas fa-user" style="color: black"></i>
               <p>
                 Management User
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('inputKategori.index') }}" class="nav-link @active('inputKategori.index')">
-              <i class="nav-icon fas fa-list"></i>
+            <a href="{{ route('inputKategori.index') }}" class="nav-link @active('inputKategori.index')" style="@css('inputKategori.index')">
+              <i class="nav-icon fas fa-list" style="color: black"></i>
               <p>
                 Management Kategori
               </p>
@@ -55,7 +65,7 @@
           </li>
           <li class="nav-item {{ request()->is('inputFile/*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-file-circle-plus"></i>
+              <i class="nav-icon fas fa-file-circle-plus" style="color: black"></i>
               <p>
                 File Upload
                 <i class="right fas fa-angle-left"></i>
@@ -64,8 +74,8 @@
             <ul class="nav nav-treeview" id="dynamicNavbar">
               @foreach ($allKategori as $k)
               <li class="nav-item">
-                <a href="{{ url('/inputFile'.'/'.$k->id) }}" class="nav-link {{ request()->url() == url('/inputFile'.'/'.$k->id) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{ url('/inputFile'.'/'.$k->id) }}" class="nav-link {{ request()->url() == url('/inputFile'.'/'.$k->id) ? 'active' : '' }}" style="{{ request()->url() == url('/inputFile'.'/'.$k->id) ? 'background-color: #ffa501;' : '' }}">
+                  <i class="far fa-circle nav-icon" style="color: black"></i>
                   <p>{{$k->nama}}</p>
                 </a>
               </li>

@@ -38,9 +38,8 @@ class LoginController extends Controller
         }else if (auth()->user()->role == 'user'){
             return '/dashboardUser';   
         }else{
-            return '/login';
+            return '/';
         }
-    
     }
 
     /**
